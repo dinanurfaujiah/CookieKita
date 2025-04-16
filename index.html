@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookies</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Quicksand', sans-serif;
+    }
+    body {
+      line-height: 1.6;
+      background: #fffaf5;
+      color: #333;
+    }
+    header {
+      background: #f6d7b0;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2rem;
+      color: #6b3e26;
+    }
+    nav {
+      margin-top: 0.5rem;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #6b3e26;
+      font-weight: bold;
+    }
+    .hero {
+      background: url('https://source.unsplash.com/featured/?cookies') center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background-blend-mode: overlay;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .hero h2 {
+      font-size: 2rem;
+      max-width: 600px;
+    }
+    section {
+      padding: 2rem;
+    }
+    .produk {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .produk-item {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .produk-item img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .testimoni {
+      font-style: italic;
+      margin: 1rem 0;
+    }
+    .kontak {
+      background: #f6d7b0;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #6b3e26;
+      color: #fff;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #6b3e26;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+
+    .produk-slider-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .produk-slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 1rem 0;
+      gap: 1.5rem;
+    }
+
+    .produk-item {
+      flex: 0 0 auto;
+      width: 250px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .produk-item img {
+      width: 100%;
+      border-radius: 10px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #6b3e26;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .slider-btn.left {
+      left: 0;
+    }
+
+    .slider-btn.right {
+      right: 0;
+    }
+
+    @media (max-width: 600px) {
+      .slider-btn {
+        font-size: 1rem;
+        padding: 0.3rem 0.5rem;
+      }
+    }
+
+    .kontak-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .kontak-icon {
+      margin-right: 0.75rem;
+      color: #6b3e26;
+      font-size: 1.4rem;
+    }
+
+    .kontak-item a {
+      text-decoration: none;
+      color: #6b3e26;
+      transition: color 0.3s;
+    }
+
+    .kontak-item a:hover {
+      color: #b36b42;
+    }
+    .tentang-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 1rem;
+      background-color: #fff7f0;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .tentang-text {
+      flex: 1 1 300px;
+      font-size: 1.1rem;
+      color: #6b3e26;
+    }
+
+    .tentang-text h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #b36b42;
+    }
+
+    .tentang-text p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .tentang-img {
+      flex: 1 1 300px;
+      text-align: center;
+    }
+
+    .tentang-img img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .btn-pesan {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #b36b42;
+      color: white;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-pesan:hover {
+      background-color: #8e5031;
+    }
+
+    .hero {
+      background: url('B.png') no-repeat center center/cover;
+      color: #fff;
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+      animation: fadeInUp 1.2s ease;
+    }
+
+
+    .hero-icon {
+      width: 120px;
+      animation: bounce 2s infinite;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .tagline {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    .subtext {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .promo-box {
+      background-color: #f1b478;
+      color: #4a2e1f;
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: bold;
+      margin-bottom: 1.2rem;
+      animation: flash 2s ease-in-out infinite;
+    }
+
+    .btn-hero {
+      background-color: #fff;
+      color: #4a2e1f;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-hero:hover {
+      background-color: #f1b478;
+      transform: scale(1.05);
+    }
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes flash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+
+</style>
+</head>
+<body>
+  <header>
+    <h1>CookiesKita</h1>
+    <nav>
+      <a href="#tentang">Tentang</a>
+      <a href="#produk">Produk</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+  </header>
+
+  <section class="hero" style="padding-top: 40px; padding-bottom: 10px;">
+    <div class="hero-content">
+      <img src="D.png" alt="Logo Cookies" class="hero-icon"/>
+      <h1>Kue Kering Lebaran Homemade</h1>
+      <p class="subtext">Pesan sekarang dan nikmati cita rasa tradisional dalam hampers cantik, cocok untuk keluarga & orang tersayang.</p>
+      <div class="promo-box">🎁 <strong>Diskon 10%</strong> untuk 100 pembeli pertama!</div>
+      <a href="#kontak" class="btn-hero">Pesan Sekarang</a>
+    </div>
+  </section>
+
+
+  <section id="tentang" class="tentang">
+    <div class="tentang-container">
+      <div class="tentang-text">
+        <h2><i class="fas fa-cookie-bite"></i> Tentang CookiesKita</h2>
+        <p>
+          <strong>CookiesKita</strong> adalah UMKM rumahan yang menghadirkan kue kering premium khas lebaran dengan cita rasa rumahan yang tak terlupakan. Kami menyajikan beragam pilihan favorit seperti <em>nastar lumer isi nanas asli</em>, <em>kastengel gurih keju melimpah</em>, dan <em>putri salju yang lembut dan manis</em>. 
+        </p>
+        <p>
+          Dibuat tanpa pengawet dan menggunakan bahan pilihan berkualitas tinggi, CookiesKita hadir untuk menemani setiap momen spesialmu — dari lebaran, hantaran, hingga hampers cantik untuk orang tersayang. Rasakan kelezatannya dalam setiap gigitan!
+        </p>
+        <a href="#kontak" class="btn-pesan">Pesan Sekarang</a>
+      </div>
+      <div class="tentang-img">
+        <img src="06.jpeg" alt="CookiesKita" width="50%">
+      </div>
+    </div>
+  </section>
+
+
+  <section id="produk">
+    <h2>Produk Unggulan</h2>
+    <div class="produk-slider-wrapper">
+      <button class="slider-btn left" onclick="slideLeft()">&#10094;</button>
+      <div class="produk-slider" id="produkSlider">
+        <div class="produk-item">
+          <img src="03.png" alt="Nastar">
+          <h3>Nastar Premium</h3>
+          <p>Rp60.000 / Toples</p>
+          <a class="btn" href="https://wa.me/6285874135178">Pesan Sekarang</a>
+        </div>
+        <div class="produk-item">
+          <img src="02.png" alt="Kastengel">
+          <h3>Kastengel Keju</h3>
+          <p>Rp65.000 / Toples</p>
+          <a class="btn" href="https://wa.me/6285874135178">Pesan Sekarang</a>
+        </div>
+        <div class="produk-item">
+          <img src="01.png" alt="Putri Salju">
+          <h3>Putri Salju</h3>
+          <p>Rp55.000 / Toples</p>
+          <a class="btn" href="https://wa.me/6285874135178">Pesan Sekarang</a>
+        </div>
+        <div class="produk-item">
+          <img src="05.jpeg" alt="Choco Chip">
+          <h3>Choco Chip</h3>
+          <p>Rp58.000 / Toples</p>
+          <a class="btn" href="https://wa.me/6285874135178">Pesan Sekarang</a>
+        </div>
+        <div class="produk-item">
+          <img src="04.jpeg" alt="Sagu Keju">
+          <h3>Sagu Keju</h3>
+          <p>Rp50.000 / Toples</p>
+          <a class="btn" href="https://wa.me/6285874135178">Pesan Sekarang</a>
+        </div>
+      </div>
+      <button class="slider-btn right" onclick="slideRight()">&#10095;</button>
+    </div>
+  </section>
+
+
+  <section id="kontak" class="kontak">
+    <h2 style="margin-bottom: 1rem; color: #6b3e26;">Hubungi Kami</h2>
+
+    <div class="kontak-item">
+      <i class="fab fa-whatsapp kontak-icon"></i>
+      <a href="https://wa.me/6285874135178" target="_blank">+62 812-3456-7890</a>
+    </div>
+
+    <div class="kontak-item">
+      <i class="fas fa-envelope kontak-icon"></i>
+      <span>cookieskita@gmail.com</span>
+    </div>
+
+    <div class="kontak-item">
+      <i class="fab fa-instagram kontak-icon"></i>
+      <a href="https://instagram.com/cookieskita" target="_blank">@cookieskita</a>
+    </div>
+
+    <div class="kontak-map">
+      <h3 style="margin-top: 2rem;">Lokasi Kami</h3>
+      <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63347.50439920285!2d108.19547905000001!3d-7.3274919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6593d51d22cc0b%3A0x7c2dc62c0b90f03e!2sTasikmalaya!5e0!3m2!1sid!2sid!4v1688200488593!5m2!1sid!2sid" 
+      width="100%" 
+      height="300" 
+      style="border:0; border-radius: 10px; margin-top: 1rem;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+
+<footer>
+  <p>&copy; 2025 CookiesKita. All rights reserved.</p>
+</footer>
+
+<script>
+  function slideLeft() {
+    const slider = document.getElementById('produkSlider');
+    slider.scrollLeft -= 300;
+  }
+
+  function slideRight() {
+    const slider = document.getElementById('produkSlider');
+    slider.scrollLeft += 300;
+  }
+</script>
+</body>
+</html>
